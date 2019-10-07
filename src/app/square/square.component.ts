@@ -4,14 +4,15 @@ import { Component, OnInit, Input } from '@angular/core';
   selector: 'app-square',
   template: `
       <button class="btnSquare" nbButton *ngIf="!value">{{ value }}</button>
-      <button class="btnSquare" nbButton hero status="success" *ngIf="value == 'X'">{{ value }}</button>
-      <button class="btnSquare" nbButton hero status="info" *ngIf="value == 'O'">{{ value }}</button>
+      <button class="btnSquare" nbButton hero status="info" *ngIf="value == 'X'">{{ value }}</button>
+      <button class="btnSquare" nbButton hero status="danger" *ngIf="value == 'O'">{{ value }}</button>
   `,
   styles: [
     `
     .btnSquare {
     width: 100%;
     height: 100%;
+    font-size: 172px !important;
     }
     `
   ]
@@ -23,5 +24,4 @@ export class SquareComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }
