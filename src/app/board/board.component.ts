@@ -8,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class BoardComponent implements OnInit {
   squares: any[];
   xIsNext: boolean;
+  animating: boolean;
   winner: string;
+  interval: any;
 
   constructor() { }
 
@@ -17,18 +19,25 @@ export class BoardComponent implements OnInit {
   }
 
   public newGame() {
-    this.squares = Array(16).fill(null);
+    clearInterval(this.interval);
+    this.squares = Array(16).fill({ value: null, status: '' });
     this.winner = null;
     this.xIsNext = true;
+    this.animating = false;
+    this.interval = null;
   }
 
   get player() {
-    return this.xIsNext ? 'X' : 'O';
+    return this.xIsNext ? { value: 'X', status: this.playerStatus('X') } : { value: 'O', status: this.playerStatus('O') };
+  }
+
+  get animateColor() {
+    return 'success';
   }
 
   get isDraw() {
     return this.squares.every((item) => {
-      return item != null;
+      return item.value != null;
     }) && !this.winner;
   }
 
@@ -36,12 +45,25 @@ export class BoardComponent implements OnInit {
     return this.isDraw || this.winner;
   }
 
+  public playerStatus(value: string) {
+    return value === 'X' ? 'info' : 'danger';
+  }
+
   public makeMove(idx: number) {
-    if (!this.squares[idx] && !this.gameOver) {
+    if (!this.squares[idx].value && !this.gameOver) {
       this.squares.splice(idx, 1, this.player);
       this.xIsNext = !this.xIsNext;
       this.winner = this.calculateWinner();
     }
+  }
+
+  public animateWinner(...row) {
+    this.interval = setInterval((...rowItem) => {
+      for (const index of rowItem) {
+        this.squares[index].status === this.animateColor ?
+          this.squares[index].status = this.playerStatus(this.squares[index].value) : this.squares[index].status = this.animateColor;
+      }
+    }, 1000, ...row);
   }
 
   public calculateWinner(): string {
@@ -73,11 +95,12 @@ export class BoardComponent implements OnInit {
       const [a, b, c, d] = item;
       // for (let i = 0; i < lines.length; i++) {
       //   const [a, b, c] = lines[i];
-      if (this.squares[a] &&
-        this.squares[a] === this.squares[b] &&
-        this.squares[a] === this.squares[c] &&
-        this.squares[a] === this.squares[d]) {
-        return this.squares[a];
+      if (this.squares[a].value &&
+        this.squares[a].value === this.squares[b].value &&
+        this.squares[a].value === this.squares[c].value &&
+        this.squares[a].value === this.squares[d].value) {
+        this.animateWinner(...item);
+        return this.squares[a].value;
       }
     }
 

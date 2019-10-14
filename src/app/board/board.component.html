@@ -1,4 +1,4 @@
-<h1 *ngIf="!gameOver">Current Player {{ player }}</h1>
+<h1 *ngIf="!gameOver">Current Player {{ player.value }}</h1>
 
 <button (click)="newGame()" class="btnNewGame" nbButton outline status="danger">Start New Game</button>
 
@@ -11,6 +11,7 @@
 </h2>
 
 <main>
-  <app-square *ngFor="let val of squares; let i = index" [value]="val" (click)="makeMove(i)">
+  <app-square *ngFor="let item of squares; let i = index" [value]="item.value" [status]="item.status"
+    (click)="makeMove(i)">
   </app-square>
 </main>
