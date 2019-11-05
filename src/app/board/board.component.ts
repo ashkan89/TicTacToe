@@ -63,7 +63,7 @@ export class BoardComponent implements OnInit {
         this.squares[index].status === this.animateColor ?
           this.squares[index].status = this.playerStatus(this.squares[index].value) : this.squares[index].status = this.animateColor;
       }
-    }, 1000, ...row);
+    }, 500, ...row);
   }
 
   public calculateWinner(): string {
