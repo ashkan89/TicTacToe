@@ -9,6 +9,6 @@ pipeline {
 
   }
   environment {
-    DEMI = 'Stage Env'
+    DEMO = 'Stage Env'
   }
 }
