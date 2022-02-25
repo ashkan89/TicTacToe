@@ -12,7 +12,24 @@ pipeline {
     }
     stage('Test') {
       steps {
-        echo "Tesing. I can relesse ${RELEASE}, but not log level ${LOG_LEVEL}"
+        echo "Tesing relesse ${RELEASE}..."
+      }
+    }
+    stage('Deploy') {
+      input {
+        message 'Deploy?'
+        ok 'Do it!'
+        parameters {
+          string(name: 'TARGET_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment environment')
+        }
+        steps {
+          echo "Deploying release ${RELEASE} to environment ${TARGET_ENVIRONMENT}"
+        }
+      }
+    }
+    post {
+      always {
+        echo 'Prints whether deploy happened or not, success or failure'
       }
     }
   }
