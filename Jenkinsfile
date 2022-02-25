@@ -27,12 +27,12 @@ pipeline {
         }
       }
     }
-  }
-  post {
+    post {
       always {
         echo 'Prints whether deploy happened or not, success or failure'
       }
     }
+  }
   environment {
     RELEASE='20.04'
   }
