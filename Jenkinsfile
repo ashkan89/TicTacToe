@@ -7,7 +7,7 @@ pipeline {
         LOG_LEVEL='INFO'
       }
       steps {
-        echo 'Building ${RELEASE} with log level ${LOG_LEVEL}...'
+        echo "Building ${RELEASE} with log level ${LOG_LEVEL}..."
       }
     }
     stage('Test') {
