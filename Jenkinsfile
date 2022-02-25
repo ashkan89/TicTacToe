@@ -12,7 +12,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        echo "Tesing I can relesse ${RELEASE}, but not log level ${LOG_LEVEL}"
+        echo "Tesing. I can relesse ${RELEASE}, but not log level ${LOG_LEVEL}"
       }
     }
   }
