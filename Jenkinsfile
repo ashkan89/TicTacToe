@@ -6,8 +6,27 @@ pipeline {
       environment {
         LOG_LEVEL='INFO'
       }
-      steps {
-        echo "Building ${RELEASE} with log level ${LOG_LEVEL}..."
+      parallel {
+        stage('linux-arm64') {
+          steps {
+            echo "Building ${RELEASE} for ${STAGE_NAME} with log level ${LOG_LEVEL}..."
+          }
+        }
+        stage('linux-amd64') {
+          steps {
+            echo "Building ${RELEASE} for ${STAGE_NAME} with log level ${LOG_LEVEL}..."
+          }
+        }
+        stage('windows-arm64') {
+          steps {
+            echo "Building ${RELEASE} for ${STAGE_NAME} with log level ${LOG_LEVEL}..."
+          }
+        }
+        stage('windows-amd64') {
+          steps {
+            echo "Building ${RELEASE} for ${STAGE_NAME} with log level ${LOG_LEVEL}..."
+          }
+        }
       }
     }
     stage('Test') {
