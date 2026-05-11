@@ -55,6 +55,6 @@ jobs:
 
     steps:
       - uses: actions/download-artifact@v8
-      with:
-        name: my-artifact
-        path:  "https://github.com/RetroPie/RetroPie-Setup/releases/download/4.8/retropie-buster-4.8-rpi2_3_zero2w.img.gz"
+        with:
+          name: my-artifact
+          path:  "https://github.com/RetroPie/RetroPie-Setup/releases/download/4.8/retropie-buster-4.8-rpi2_3_zero2w.img.gz"
